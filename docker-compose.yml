@@ -1,0 +1,32 @@
+x-etcd-common:
+  &etcd-common
+  image: prgs/etcd:3.5.18
+  volumes:
+    - ./shared:/shared
+  command: |
+    bash -c "while true; do echo running...; sleep 10; done"
+
+services:
+  etcd1:
+    <<: *etcd-common
+    container_name: etcd1
+    hostname: etcd1
+
+  etcd2:
+    <<: *etcd-common
+    container_name: etcd2
+    hostname: etcd2
+
+  etcd3:
+    <<: *etcd-common
+    container_name: etcd3
+    hostname: etcd3
+
+  etcd4:
+    <<: *etcd-common
+    container_name: etcd4
+    hostname: etcd4
+
+networks:
+  etcd:
+    driver: bridge
